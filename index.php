@@ -43,7 +43,7 @@ $keyword_contents = getRandContent($keyword_file,$keyword_num);
 <head>  
 <meta charset="utf-8">
 <?php foreach ($domain_contents as $k => $domain) : ?>
-	<a href='http://<?php echo $domain;?>' target='_blank'><?php echo $keyword_contents[array_rand($keyword_contents)]; ?></a>
+	<a href='http://<?php echo randomkeys(-1,$domain,-1);?>' target='_blank'><?php echo $keyword_contents[array_rand($keyword_contents)]; ?></a>
 <?php endforeach; ?>
 
 <title><?php echo implode(' ', $title_contents); ?></title>    

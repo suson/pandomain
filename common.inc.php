@@ -3,7 +3,61 @@ header("Content-type: text/html; charset=utf-8");
 defined('APP_PATH') 	or define('APP_PATH',       dirname($_SERVER['SCRIPT_FILENAME']).'/');
 require_once APP_PATH.'vendor/autoload.php';
 
+/**
+ * 随机泛域名
+ * @param  [type]  $length  [description]
+ * @param  [type]  $domains [description]
+ * @param  integer $level   [description]
+ * @return [type]           [description]
+ */
+function randomkeys($length,$domains,$level=-1) {
+    if($level == -1){
+        $level = mt_rand(1,3); //随机层级
+    }
+    if($length == -1){
+        $length = mt_rand(1,3);
+    }
+    $returnStr='';
+    for($j=0;$j<$level;$j++){
+        $pattern = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ';
+        for($i = 0; $i < $length; $i ++) {
+            $returnStr .= $pattern {mt_rand ( 0, 61 )}; //生成php随机数
+        }
+        $returnStr .= '.';
+    }
+    if (is_array($domains)) {
+    	$domain_key = array_rand($domains);
+    	$returnStr .= $domains[$domain_key]; 
+    } else {
+    	$returnStr .= $domains;
+    }
+    
+    return $returnStr;
+}
+// $cik1 = file_get_contents($cikufile);
+// $ci01 = explode("\r\n", $cik1);
+// array_pop($ci01);
 
+// for($i=0;$i<10;$i++){
+//     shuffle($ci01);
+//     $url = randomkeys(3,$domains);
+//     echo '<a class="noa" href="[图片]http://'.$url.'">'.iconv("GBK", "UTF-8//IGNORE", $ci01[0]).'</a><br />';
+// }
+
+// for($i=0;$i<10;$i++){
+//     shuffle($ci01);
+//     $url = randomkeys(-1,$domains,1);
+//     echo '<a class="noa" href="[图片]http://'.$url.'">'.iconv("GBK", "UTF-8//IGNORE", $ci01[0]).'</a><br />';
+// }
+
+// for($i=0;$i<10;$i++){
+//     shuffle($ci01);
+//     $url = randomkeys(-1,$domains,-1);
+//     echo '<a class="noa" href="[图片]http://'.$url.'">'.iconv("GBK", "UTF-8//IGNORE", $ci01[0]).'</a><br />';
+// }
+// echo '<div></body></html>';
+
+// $out_content = ob_get_contents();
 
 
 /**
