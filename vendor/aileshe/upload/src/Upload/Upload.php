@@ -14,6 +14,9 @@ class Upload{
     public $mime = NULL;     # 允许上传文件的MIME(一维的索引数组)
     public $host = NULL;     # 文件访问域名(http://www.a.com)
     
+
+    public $savename = null;
+    public $use_source_name = 0;
     /**
      * 文件接收入口 - 单文件、多文件上传
      * @param  String  $frm_name  提交表单name
@@ -146,6 +149,9 @@ class Upload{
                 # 单文件上传
                 $ext = $this->get_file_ext($filelist[0]['name']); # 文件后缀名
                 $fileName = $ext == '' ? $this->uuid() : $this->uuid().'.'.$ext;
+                if ($this->use_source_name === 1) {
+                    $fileName = $filelist[0]['name'];
+                }
                 move_uploaded_file($filelist[0]['tmp_name'], $save_path.'/'.$fileName);
                 
                 # - 上传文件回调数据信息
@@ -163,6 +169,9 @@ class Upload{
                 foreach($filelist as $v){
                     $ext = $this->get_file_ext($v['name']); # 文件后缀名
                     $fileName = $ext == '' ? $this->uuid() : $this->uuid().'.'.$ext;
+                    if ($this->use_source_name === 1) {
+                        $fileName = $filelist[0]['name'];
+                    }
                     move_uploaded_file($v['tmp_name'], $save_path.'/'.$fileName);
                 
                     # - 上传文件回调数据信息
@@ -209,6 +218,9 @@ class Upload{
      * @return String
      */
     private function uuid($size=8){
+        if (!empty($this->savename)) {
+            return $this->savename;
+        }
         $chars='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $rand_str=null;
         for($i=0;$i<$size;$i++){
