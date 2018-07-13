@@ -3,7 +3,7 @@ require_once 'common.inc.php';
 $httphost = $_SERVER['HTTP_HOST'];
 $data = explode('.', $httphost);
 $co_ta = count($data);
-$cache_dir = APP_PATH.'cache/';
+$cache_dir = APP_PATH.'cache/'.$httphost{0};
 // 泛域名读取读取静态缓存文件
 if ($co_ta > 2) {
 	if(file_exists($cache_dir.$httphost.'.html')){
