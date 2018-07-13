@@ -1,5 +1,19 @@
 <?php
 require_once 'common.inc.php';
+$httphost = $_SERVER['HTTP_HOST'];
+$data = explode('.', $httphost);
+$co_ta = count($data);
+$cache_dir = APP_PATH.'cache/';
+// 泛域名读取读取静态缓存文件
+if ($co_ta > 2) {
+	if(file_exists($cache_dir.$httphost.'.html')){
+		include $cache_dir.$httphost.'.html';
+		die();
+	}
+}
+
+
+
 
 // var_dump(APP_PATH);
 
@@ -37,18 +51,25 @@ $keyword_contents = getRandContent($keyword_file,$keyword_num);
 
 // var_dump($title_contents,$domain_contents,$keyword_contents);
 // exit;
+if ($co_ta > 2) {
+
+	ob_start();
+}
 ?>
 
-
+<!DOCTYPE html>
+<html>
 <head>  
 <meta charset="utf-8">
-<?php foreach ($domain_contents as $k => $domain) : ?>
-	<a href='http://<?php echo randomkeys(-1,$domain,-1);?>' target='_blank'><?php echo $keyword_contents[array_rand($keyword_contents)]; ?></a>
-<?php endforeach; ?>
+
 
 <title><?php echo implode(' ', $title_contents); ?></title>    
   </head>   
 <body>
+	<?php foreach ($domain_contents as $k => $domain) : ?>
+	<a href='http://<?php echo randomkeys(-1,$domain,-1);?>' target='_blank'><?php echo $keyword_contents[array_rand($keyword_contents)]; ?></a>
+<?php endforeach; ?>
+
 <H2><?php echo implode(' ', $title_contents); ?></H2>
 
 <?php foreach ($keyword_contents as $key => $keyword): ?>
@@ -58,6 +79,14 @@ $keyword_contents = getRandContent($keyword_file,$keyword_num);
 
 </body>
 </html>
+<?php 
+if ($co_ta > 2) {
 
-</div>
-    		
+	$out_content = ob_get_contents();
+	if(!file_exists($cache_dir)){
+		mkdir($cache_dir,0777,true);
+	}
+	file_put_contents($cache_dir.$httphost.'.html',$out_content);
+}
+
+?>
