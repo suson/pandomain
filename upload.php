@@ -17,7 +17,7 @@ if (!empty($_FILES['keyword_file']['tmp_name'])) {
 	    // var_dump($filelist);
 	}else{
 	    # 如果返回负整数(int)就是发生错误了
-	    $error_msg = [-1=>'上传失败',-2=>'文件存储路径不合法',-3=>'上传非法格式文件',-4=>'文件大小不合符规定',-5=>'token验证错误'];
+	    $error_msg = array(-1=>'上传失败',-2=>'文件存储路径不合法',-3=>'上传非法格式文件',-4=>'文件大小不合符规定',-5=>'token验证错误');
 	    $arr['keyword_file'] = '关键词文件：'.$error_msg[$filelist];
 	}
 	// header('location:upload.php');
@@ -33,7 +33,7 @@ if (!empty($_FILES['domain_file']['tmp_name'])) {
 	    // var_dump($filelist);
 	}else{
 	    # 如果返回负整数(int)就是发生错误了
-	    $error_msg = [-1=>'上传失败',-2=>'文件存储路径不合法',-3=>'上传非法格式文件',-4=>'文件大小不合符规定',-5=>'token验证错误'];
+	    $error_msg = array(-1=>'上传失败',-2=>'文件存储路径不合法',-3=>'上传非法格式文件',-4=>'文件大小不合符规定',-5=>'token验证错误');
 	    $arr['domain_file'] = '域名文件：'.$error_msg[$filelist];
 	}
 	// header('location:upload.php');
@@ -49,7 +49,7 @@ if (!empty($_FILES['title_file']['tmp_name'])) {
 	    // var_dump($filelist);
 	}else{
 	    # 如果返回负整数(int)就是发生错误了
-	    $error_msg = [-1=>'上传失败',-2=>'文件存储路径不合法',-3=>'上传非法格式文件',-4=>'文件大小不合符规定',-5=>'token验证错误'];
+	    $error_msg = array(-1=>'上传失败',-2=>'文件存储路径不合法',-3=>'上传非法格式文件',-4=>'文件大小不合符规定',-5=>'token验证错误');
 	    $arr['title_file'] = '标题文件：'.$error_msg[$filelist];
 	}
 }
